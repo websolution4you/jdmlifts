@@ -800,3 +800,21 @@ header .navbar-brand .logo-img {
     height: 40px !important; /* Scaled down for mobile to fit viewport */
   }
 }
+
+/* Symmetrical desktop alignment for logo and contact button */
+@media (min-width: 992px) {
+  header .navbar .container {
+    position: relative !important;
+  }
+  header .navbar .navbar-collapse {
+    position: static !important;
+  }
+  header .navbar .cta-btn2 {
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    z-index: 10;
+  }
+}
