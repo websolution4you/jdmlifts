@@ -768,3 +768,35 @@ a:hover {
   -ms-touch-action: pan-y !important;
   touch-action: pan-y !important;
 }
+
+/* JDMlifts s.r.o. Logo Responsive Positioning and Sizing */
+header .navbar-brand {
+  position: absolute !important;
+  top: 50% !important;
+  left: 15px !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 10;
+  display: block;
+}
+header .navbar-brand .logo-img {
+  height: 70px; /* Enlarged for desktop */
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  header .navbar-brand {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    display: inline-block !important;
+    margin: 5px 0 !important;
+    padding: 0 !important;
+  }
+  header .navbar-brand .logo-img {
+    height: 48px; /* Scaled down for mobile to fit viewport */
+  }
+}
