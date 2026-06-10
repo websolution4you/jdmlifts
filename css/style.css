@@ -784,7 +784,7 @@ header .navbar-brand {
   display: block;
 }
 header .navbar-brand .logo-img {
-  height: 52px !important; /* Elegant size on desktop */
+  height: 60px !important; /* Elegant size on desktop */
   width: auto;
   display: block;
 }
@@ -800,7 +800,7 @@ header .navbar-brand .logo-img {
     padding: 0 !important;
   }
   header .navbar-brand .logo-img {
-    height: 40px !important; /* Scaled down for mobile to fit viewport */
+    height: 46px !important; /* Scaled down for mobile to fit viewport */
   }
 }
 
