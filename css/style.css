@@ -58,11 +58,14 @@ h1, h2, h3, h4, h5 {
 
 /* Header */
 header {
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 5; }
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  background: white; }
   header .navbar-brand {
     text-transform: uppercase;
     letter-spacing: .2em;
