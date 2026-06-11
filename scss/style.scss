@@ -319,15 +319,15 @@ header {
 				height: calc(100vh - 117px);
 				min-height: 700px;
 				h1 {
-					font-size: 3rem;
+					font-size: 2.7rem;
 					color: $white;
 					line-height: 1.2;
-					font-weight: 800!important;
+					font-weight: 400!important;
 					text-transform: uppercase;
-					-webkit-text-stroke: 1.5px #f4b214;
+					-webkit-text-stroke: 1px #f4b214;
 					text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 					@include media-breakpoint-down(md) {
-						font-size: 40px;
+						font-size: 34px;
 					}
 				}
 				p {
