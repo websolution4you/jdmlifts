@@ -197,4 +197,112 @@
 	};
 	counter();
 
+	// Lightbox Gallery
+	var lightboxHTML = 
+		'<div id="custom-lightbox" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.9); align-items:center; justify-content:center; flex-direction:column; color:#fff; opacity:0; transition:opacity 0.3s ease;">' +
+			'<span id="lightbox-close" style="position:absolute; top:20px; right:30px; font-size:40px; font-weight:bold; cursor:pointer; color:#fff; user-select:none; z-index:10001;">&times;</span>' +
+			'<a id="lightbox-prev" style="position:absolute; left:20px; font-size:45px; cursor:pointer; color:#fff; user-select:none; text-decoration:none; z-index:10001; transition: color 0.2s;">&#10094;</a>' +
+			'<div style="max-width:85%; max-height:80%; display:flex; align-items:center; justify-content:center; position:relative;">' +
+				'<img id="lightbox-img" src="" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:4px; box-shadow:0 10px 30px rgba(0,0,0,0.5); transform:scale(0.95); transition:transform 0.3s ease;">' +
+			'</div>' +
+			'<div id="lightbox-caption" style="margin-top:20px; font-size:18px; text-align:center; font-family:\'Poppins\', sans-serif; font-weight:400; padding:0 20px;"></div>' +
+			'<a id="lightbox-next" style="position:absolute; right:20px; font-size:45px; cursor:pointer; color:#fff; user-select:none; text-decoration:none; z-index:10001; transition: color 0.2s;">&#10095;</a>' +
+		'</div>';
+
+	$('body').append(lightboxHTML);
+
+	var $lightbox = $('#custom-lightbox');
+	var $lightboxImg = $('#lightbox-img');
+	var $lightboxCaption = $('#lightbox-caption');
+	var galleryItems = [];
+	var currentIndex = 0;
+
+	// Collect all gallery items
+	function updateGalleryItems() {
+		galleryItems = [];
+		$('[data-lightbox="gallery"]').each(function() {
+			var href = $(this).attr('href');
+			var title = $(this).find('h3').text() || $(this).attr('data-title') || '';
+			galleryItems.push({ href: href, title: title });
+		});
+	}
+
+	function showImage(index) {
+		if (index < 0 || index >= galleryItems.length) return;
+		currentIndex = index;
+		var item = galleryItems[currentIndex];
+		
+		// Smooth scale transition
+		$lightboxImg.css('transform', 'scale(0.95)');
+		setTimeout(function() {
+			$lightboxImg.attr('src', item.href);
+			$lightboxCaption.text(item.title);
+			$lightboxImg.css('transform', 'scale(1)');
+		}, 150);
+	}
+
+	$(document).on('click', '[data-lightbox="gallery"]', function(e) {
+		e.preventDefault();
+		updateGalleryItems();
+		
+		var href = $(this).attr('href');
+		var index = galleryItems.findIndex(function(item) {
+			return item.href === href;
+		});
+		
+		if (index !== -1) {
+			showImage(index);
+			$lightbox.css('display', 'flex');
+			// trigger fade in
+			setTimeout(function() {
+				$lightbox.css('opacity', '1');
+			}, 50);
+		}
+	});
+
+	function closeLightbox() {
+		$lightbox.css('opacity', '0');
+		setTimeout(function() {
+			$lightbox.css('display', 'none');
+			$lightboxImg.attr('src', '');
+		}, 300);
+	}
+
+	$('#lightbox-close').on('click', function() {
+		closeLightbox();
+	});
+
+	$lightbox.on('click', function(e) {
+		if (e.target === this || e.target.id === 'custom-lightbox') {
+			closeLightbox();
+		}
+	});
+
+	$('#lightbox-prev').on('click', function(e) {
+		e.stopPropagation();
+		var prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+		showImage(prevIndex);
+	});
+
+	$('#lightbox-next').on('click', function(e) {
+		e.stopPropagation();
+		var nextIndex = (currentIndex + 1) % galleryItems.length;
+		showImage(nextIndex);
+	});
+
+	// Hover effects
+	$('#lightbox-prev, #lightbox-next, #lightbox-close').hover(
+		function() { $(this).css('color', '#fecd0e'); },
+		function() { $(this).css('color', '#fff'); }
+	);
+
+	// Keyboard support
+	$(document).on('keydown', function(e) {
+		if ($lightbox.css('display') === 'flex') {
+			if (e.key === 'Escape') closeLightbox();
+			if (e.key === 'ArrowLeft') $('#lightbox-prev').click();
+			if (e.key === 'ArrowRight') $('#lightbox-next').click();
+		}
+	});
+
 })(jQuery);
