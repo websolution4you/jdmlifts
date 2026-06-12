@@ -1021,9 +1021,9 @@ header .navbar .cta-btn2 .nav-link:hover span {
 /* Image style for about page to display full images without cropping */
 .about-page-img {
   width: 100%;
-  height: auto !important;
-  max-height: 400px;
-  object-fit: contain !important;
+  height: 420px !important;
+  object-fit: cover !important;
+  object-position: center !important;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
