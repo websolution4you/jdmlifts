@@ -886,3 +886,18 @@ header {
     padding: 0 !important;
   }
 }
+
+/* Make contact button text black by default and yellow on hover, matching other menu items */
+header .navbar .cta-btn2 .nav-link {
+  color: #111111 !important;
+}
+header .navbar .cta-btn2 .nav-link:hover {
+  color: #f4b214 !important;
+}
+header .navbar .cta-btn2 .nav-link span {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease;
+}
+header .navbar .cta-btn2 .nav-link:hover span {
+  border-color: #f4b214 !important;
+}
