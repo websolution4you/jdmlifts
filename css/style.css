@@ -878,3 +878,44 @@ header .navbar .cta-btn2 .nav-link:hover span {
   border-color: #e5b80a !important;
   color: #111111 !important;
 }
+
+/* Custom cinematic foggy/misty transitions for homepage slider */
+@keyframes fogIn {
+  0% {
+    opacity: 0;
+    filter: blur(25px) brightness(1.2);
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes fogOut {
+  0% {
+    opacity: 1;
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(25px) brightness(1.2);
+    transform: scale(1.04);
+  }
+}
+
+.fogIn {
+  animation-name: fogIn;
+}
+
+.fogOut {
+  animation-name: fogOut;
+}
+
+/* Slower duration strictly for the homepage slider transition */
+.home-slider .animated {
+  animation-duration: 2200ms !important;
+  animation-fill-mode: both !important;
+}

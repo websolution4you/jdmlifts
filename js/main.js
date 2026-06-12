@@ -36,9 +36,10 @@
 	$('.home-slider').owlCarousel({
     loop:true,
     autoplay: true,
+    autoplayTimeout: 7000,
     margin:10,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
+    animateOut: 'fogOut',
+    animateIn: 'fogIn',
     nav:true,
     autoplayHoverPause: true,
     items: 1,
