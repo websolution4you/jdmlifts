@@ -991,4 +991,33 @@ header .navbar .cta-btn2 .nav-link:hover span {
     filter: blur(0);
   }
 }
+
+/* Ensure banner headings in inner-pages match the styled home-slider headings */
+.inner-page {
+	.slider-item {
+		.slider-text {
+			h1 {
+				font-family: "Poppins", sans-serif;
+				font-size: 2.7rem;
+				color: $white;
+				line-height: 1.2;
+				font-weight: 400 !important;
+				text-transform: uppercase;
+				-webkit-text-stroke: 0.5px #fecd0e;
+				text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.6), 2px 2px 0px rgba(0, 0, 0, 0.5), 3px 3px 6px rgba(0, 0, 0, 0.5);
+				@include media-breakpoint-down(md) {
+					font-size: 34px;
+				}
+			}
+		}
+	}
+}
+
+/* Align the yellow bottom border line to the left for left-aligned headings */
+.heading.border-bottom.text-left {
+	&:before {
+		left: 0;
+		transform: none;
+	}
+}
 
