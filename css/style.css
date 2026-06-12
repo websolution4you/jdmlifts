@@ -1040,3 +1040,10 @@ header .navbar .cta-btn2 .nav-link:hover span {
     font-weight: 500 !important;
   }
 }
+
+/* Add margin above the CTA button on mobile to prevent overlap with heading text */
+@media (max-width: 991.98px) {
+  .cta-overlap .text .btn-wrap {
+    margin-top: 20px;
+  }
+}
