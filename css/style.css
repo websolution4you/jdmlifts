@@ -250,8 +250,8 @@ header {
   z-index: 1;
   position: relative; }
   .owl-carousel.home-slider .owl-item.active .slider-text h1 .char {
-    -webkit-animation: rollLetter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
-    animation: rollLetter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; }
+    -webkit-animation: rollLetter 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+    animation: rollLetter 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; }
   .owl-carousel.home-slider .owl-nav {
     opacity: 0;
     visibility: hidden;

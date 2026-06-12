@@ -40,7 +40,7 @@
 			var words = text.split(' ');
 			var newHtml = '';
 			var delay = 0.1; // initial delay offset
-			var delayStep = 0.03; // 30ms delay per letter
+			var delayStep = 0.045; // 45ms delay per letter
 			
 			words.forEach(function(word, wordIndex) {
 				var wordHtml = '<span class="word" style="display: inline-block; white-space: nowrap;">';
