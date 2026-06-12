@@ -136,7 +136,7 @@ header {
       outline: none !important; }
       @media (max-width: 1199.98px) {
         header .navbar .nav-link {
-          padding: .5rem 0rem; } }
+          padding: 1.7rem .5rem !important; } }
       @media (max-width: 991.98px) {
         header .navbar .nav-link {
           padding: 0.5rem 0rem !important; } }
@@ -774,16 +774,14 @@ a:hover {
   touch-action: pan-y !important;
 }
 
-/* JDMlifts s.r.o. Logo Responsive Positioning and Sizing */
+/* JDMlifts s.r.o. Logo Positioning and Sizing */
 header .navbar-brand {
-  position: absolute !important;
-  top: 50% !important;
-  left: 15px !important;
-  transform: translateY(-50%) !important;
+  position: static !important;
+  transform: none !important;
   margin: 0 !important;
   padding: 0 !important;
-  z-index: 10;
   display: block;
+  z-index: 10;
 }
 header .navbar-brand .logo-img {
   height: 60px !important; /* Elegant size on desktop */
@@ -794,39 +792,71 @@ header .navbar-brand .logo-img {
 @media (max-width: 991.98px) {
   header .navbar-brand {
     position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    display: inline-block !important;
     margin: 5px 0 !important;
-    padding: 0 !important;
+    display: inline-block !important;
   }
   header .navbar-brand .logo-img {
     height: 46px !important; /* Scaled down for mobile to fit viewport */
   }
 }
 
-/* Symmetrical desktop alignment for logo and contact button */
+/* Symmetrical desktop alignment for logo, menu, and contact button using Flexbox */
 @media (min-width: 992px) {
   header .navbar .container {
-    position: relative !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: relative;
+  }
+  header .navbar-brand {
+    flex: 1 1 0% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10;
+  }
+  header .navbar-brand .logo-img {
+    height: 60px !important;
+    width: auto;
+    display: block;
   }
   header .navbar .navbar-collapse {
-    position: static !important;
+    display: contents !important;
+  }
+  header .navbar .navbar-nav {
+    flex: 0 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    transform: none !important;
   }
   header .navbar .cta-btn2 {
-    position: absolute !important;
-    right: 15px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
+    flex: 1 1 0% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    position: static !important;
+    transform: none !important;
     margin: 0 !important;
     z-index: 10;
   }
-  /* Center the menu items perfectly between the logo (left) and the button (right) */
-  html[lang="sk"] header .navbar .navbar-nav {
-    transform: translateX(-17px) !important;
+}
+
+@media (max-width: 991.98px) {
+  header .navbar .cta-btn2 {
+    text-align: center !important;
+    margin: 15px 0 !important;
+    width: 100% !important;
+    display: block !important;
   }
-  html[lang="en"] header .navbar .navbar-nav {
-    transform: translateX(3px) !important;
+  header .navbar .cta-btn2 .nav-link {
+    display: inline-block !important;
+    padding: 0 !important;
   }
 }

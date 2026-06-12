@@ -146,7 +146,7 @@ header {
 			padding: 1.7rem 1rem!important;
 			outline: none!important;
 			@include media-breakpoint-down(lg) {
-				padding: .5rem 0rem;
+				padding: 1.7rem .5rem!important;
 			}
 			@include media-breakpoint-down(md) {
 				padding: .5rem 0rem!important;
@@ -829,24 +829,60 @@ header {
 
 @media (min-width: 992px) {
   header .navbar .container {
-    position: relative !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: relative;
+  }
+  header .navbar-brand {
+    flex: 1 1 0% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10;
+  }
+  header .navbar-brand .logo-img {
+    height: 60px !important;
+    width: auto;
+    display: block;
   }
   header .navbar .navbar-collapse {
-    position: static !important;
+    display: contents !important;
+  }
+  header .navbar .navbar-nav {
+    flex: 0 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    transform: none !important;
   }
   header .navbar .cta-btn2 {
-    position: absolute !important;
-    right: 15px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
+    flex: 1 1 0% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    position: static !important;
+    transform: none !important;
     margin: 0 !important;
     z-index: 10;
   }
-  /* Center the menu items perfectly between the logo (left) and the button (right) */
-  html[lang="sk"] header .navbar .navbar-nav {
-    transform: translateX(-17px) !important;
+}
+
+@media (max-width: 991.98px) {
+  header .navbar .cta-btn2 {
+    text-align: center !important;
+    margin: 15px 0 !important;
+    width: 100% !important;
+    display: block !important;
   }
-  html[lang="en"] header .navbar .navbar-nav {
-    transform: translateX(3px) !important;
+  header .navbar .cta-btn2 .nav-link {
+    display: inline-block !important;
+    padding: 0 !important;
   }
 }
