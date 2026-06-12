@@ -826,3 +826,27 @@ header {
     stroke-dashoffset: -136px;
   }
 }
+
+@media (min-width: 992px) {
+  header .navbar .container {
+    position: relative !important;
+  }
+  header .navbar .navbar-collapse {
+    position: static !important;
+  }
+  header .navbar .cta-btn2 {
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    z-index: 10;
+  }
+  /* Center the menu items perfectly between the logo (left) and the button (right) */
+  html[lang="sk"] header .navbar .navbar-nav {
+    transform: translateX(-17px) !important;
+  }
+  html[lang="en"] header .navbar .navbar-nav {
+    transform: translateX(3px) !important;
+  }
+}

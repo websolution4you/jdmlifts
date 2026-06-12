@@ -822,4 +822,11 @@ header .navbar-brand .logo-img {
     margin: 0 !important;
     z-index: 10;
   }
+  /* Center the menu items perfectly between the logo (left) and the button (right) */
+  html[lang="sk"] header .navbar .navbar-nav {
+    transform: translateX(-17px) !important;
+  }
+  html[lang="en"] header .navbar .navbar-nav {
+    transform: translateX(3px) !important;
+  }
 }
