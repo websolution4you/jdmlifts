@@ -307,6 +307,11 @@ header {
 				visibility: visible;
 			}
 		}
+		.owl-item.active {
+			.slider-text h1 .char {
+				animation: rollLetter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+			}
+		}
 
 		.slider-item {
 			background-size: cover;
@@ -328,6 +333,13 @@ header {
 					text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.6), 2px 2px 0px rgba(0, 0, 0, 0.5), 3px 3px 6px rgba(0, 0, 0, 0.5);
 					@include media-breakpoint-down(md) {
 						font-size: 34px;
+					}
+					.char {
+						display: inline-block;
+						opacity: 0;
+						transform: translateX(-15px) scale(0.7) rotate(-10deg);
+						filter: blur(2px);
+						transition: none;
 					}
 				}
 				p {
@@ -964,5 +976,18 @@ header .navbar .cta-btn2 .nav-link:hover span {
 @media (max-width: 575.98px) {
   .about-section-img {
     height: 280px !important;
+  }
+}
+
+@keyframes rollLetter {
+  0% {
+    opacity: 0;
+    transform: translateX(-15px) scale(0.7) rotate(-10deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0deg);
+    filter: blur(0);
   }
 }

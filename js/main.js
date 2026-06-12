@@ -32,6 +32,33 @@
 	  console.log('show');
 	});
 
+	// Split home slider headings for letter-by-letter animation
+	var splitSliderHeadings = function() {
+		$('.home-slider .slider-text h1').each(function() {
+			var $h1 = $(this);
+			var text = $h1.text().trim();
+			var words = text.split(' ');
+			var newHtml = '';
+			var delay = 0.1; // initial delay offset
+			var delayStep = 0.03; // 30ms delay per letter
+			
+			words.forEach(function(word, wordIndex) {
+				var wordHtml = '<span class="word" style="display: inline-block; white-space: nowrap;">';
+				for (var i = 0; i < word.length; i++) {
+					wordHtml += '<span class="char" style="animation-delay: ' + delay.toFixed(3) + 's; -webkit-animation-delay: ' + delay.toFixed(3) + 's;">' + word[i] + '</span>';
+					delay += delayStep;
+				}
+				wordHtml += '</span>';
+				newHtml += wordHtml;
+				if (wordIndex < words.length - 1) {
+					newHtml += ' ';
+				}
+			});
+			$h1.html(newHtml);
+		});
+	};
+	splitSliderHeadings();
+
 	// home slider
 	$('.home-slider').owlCarousel({
     loop:true,
