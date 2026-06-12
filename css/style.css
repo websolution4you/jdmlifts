@@ -413,11 +413,7 @@ header {
       -ms-transform: translateX(-50%);
       transform: translateX(-50%);
       background: #fecd0e; }
-    .heading.border-bottom.text-left:before {
-      left: 0;
-      -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-      transform: translateX(0); }
+
 
 .text-black {
   color: #000 !important; }

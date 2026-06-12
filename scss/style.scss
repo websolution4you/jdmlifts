@@ -495,12 +495,6 @@ header {
 			transform: translateX(-50%);
 			background: theme-color('primary');
 		}
-		&.text-left {
-			&:before {
-				left: 0;
-				transform: translateX(0);
-			}
-		}
 	}
 }
 .text-black {
