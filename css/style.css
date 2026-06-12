@@ -992,3 +992,13 @@ header .navbar .cta-btn2 .nav-link:hover span {
     filter: blur(0);
   }
 }
+
+/* Ensure headings align vertically across all slides on mobile viewports */
+@media (max-width: 991.98px) {
+  .owl-carousel.home-slider .slider-item .slider-text {
+    -webkit-box-align: start !important;
+    -ms-flex-align: start !important;
+    align-items: flex-start !important;
+    padding-top: 150px !important;
+  }
+}
