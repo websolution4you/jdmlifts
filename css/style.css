@@ -1094,3 +1094,23 @@ header .navbar .cta-btn2 .nav-link:hover span {
   }
 }
 
+/* Mobile footer content center-alignment overrides */
+@media (max-width: 767.98px) {
+  .site-footer {
+    text-align: center !important;
+  }
+  .site-footer .footer-link li {
+    display: block !important;
+    text-align: center !important;
+  }
+  .site-footer .footer-link li span {
+    display: block !important;
+    margin-right: 0 !important;
+    margin-bottom: 5px !important;
+  }
+  .site-footer .footer-social {
+    justify-content: center !important;
+  }
+}
+
+
