@@ -1068,3 +1068,29 @@ header .navbar .cta-btn2 .nav-link:hover span {
   font-weight: 400 !important;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.7) !important;
 }
+
+/* Homepage slider background image overlay removal and frosted-glass text readability container */
+.home-slider:not(.inner-page) .slider-item::before {
+  background: none !important;
+  display: none !important;
+}
+
+.home-slider:not(.inner-page) .slider-text .element-animate {
+  background: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  padding: 45px 35px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45) !important;
+  display: inline-block !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 575.98px) {
+  .home-slider:not(.inner-page) .slider-text .element-animate {
+    padding: 25px 15px !important;
+  }
+}
+
