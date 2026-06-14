@@ -89,36 +89,40 @@
       <div class="row">
         <div class="col-md-7 mb-5 mb-md-0">
           <h2 class="text-uppercase heading border-bottom mb-4 text-left">Napíšte nám</h2>
-          <form action="#" method="post"
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST"
             style="background: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid #eee;">
+            <input type="hidden" name="access_key" value="f76a509f-c4bc-44cb-a519-3382ac52dacc">
+            <!-- Spam protection - honeypot -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
             <div class="row">
               <div class="col-md-6 form-group">
                 <label for="fname" style="font-weight: bold; color: #111;">Meno</label>
-                <input type="text" class="form-control form-control-lg" id="fname" placeholder="Vaše meno">
+                <input type="text" name="name" class="form-control form-control-lg" id="fname" placeholder="Vaše meno" required>
               </div>
               <div class="col-md-6 form-group">
                 <label for="lname" style="font-weight: bold; color: #111;">Priezvisko</label>
-                <input type="text" class="form-control form-control-lg" id="lname" placeholder="Vaše priezvisko">
+                <input type="text" name="surname" class="form-control form-control-lg" id="lname" placeholder="Vaše priezvisko" required>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 form-group">
                 <label for="email" style="font-weight: bold; color: #111;">E-mail</label>
-                <input type="email" id="email" class="form-control form-control-lg" placeholder="vas@email.sk">
+                <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="vas@email.sk" required>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 form-group">
                 <label for="message" style="font-weight: bold; color: #111;">Správa</label>
                 <textarea name="message" id="message" class="form-control form-control-lg" cols="30" rows="8"
-                  placeholder="Ako vám môžeme pomôcť?"></textarea>
+                  placeholder="Ako vám môžeme pomôcť?" required></textarea>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-md-6 form-group">
-                <input type="submit" value="Odoslať správu" class="btn btn-primary btn-lg btn-block">
+                <input type="submit" id="submitBtn" value="Odoslať správu" class="btn btn-primary btn-lg btn-block">
               </div>
             </div>
+            <div id="formResponse" class="mt-3" style="display: none; padding: 15px; border-radius: 5px; font-weight: bold;"></div>
           </form>
         </div>
         <div class="col-md-1"></div>
@@ -225,6 +229,66 @@
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/jquery.waypoints.min.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formResponse = document.getElementById('formResponse');
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        submitBtn.disabled = true;
+        submitBtn.value = "Odosiela sa...";
+        
+        formResponse.style.display = 'none';
+        formResponse.textContent = '';
+        
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+        
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: json
+        })
+        .then(async (response) => {
+          let jsonRes = await response.json();
+          if (response.status == 200) {
+            formResponse.style.display = 'block';
+            formResponse.style.backgroundColor = '#d4edda';
+            formResponse.style.color = '#155724';
+            formResponse.style.border = '1px solid #c3e6cb';
+            formResponse.textContent = "Ďakujeme! Správa bola úspešne odoslaná.";
+            form.reset();
+          } else {
+            console.log(response);
+            formResponse.style.display = 'block';
+            formResponse.style.backgroundColor = '#f8d7da';
+            formResponse.style.color = '#721c24';
+            formResponse.style.border = '1px solid #f5c6cb';
+            formResponse.textContent = jsonRes.message || "Nastala chyba pri odosielaní. Skúste to znova neskôr.";
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          formResponse.style.display = 'block';
+          formResponse.style.backgroundColor = '#f8d7da';
+          formResponse.style.color = '#721c24';
+          formResponse.style.border = '1px solid #f5c6cb';
+          formResponse.textContent = "Nastala chyba pri sieťovom spojení. Skúste to znova.";
+        })
+        .then(() => {
+          submitBtn.disabled = false;
+          submitBtn.value = "Odoslať správu";
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

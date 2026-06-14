@@ -80,34 +80,38 @@
         <div class="row">
           <div class="col-md-7 mb-5 mb-md-0">
             <h2 class="text-uppercase heading border-bottom mb-4 text-left">Write to Us</h2>
-            <form action="#" method="post" style="background: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid #eee;">
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" style="background: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid #eee;">
+              <input type="hidden" name="access_key" value="f76a509f-c4bc-44cb-a519-3382ac52dacc">
+              <!-- Spam protection - honeypot -->
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="fname" style="font-weight: bold; color: #111;">First Name</label>
-                  <input type="text" class="form-control form-control-lg" id="fname" placeholder="Your first name">
+                  <input type="text" name="name" class="form-control form-control-lg" id="fname" placeholder="Your first name" required>
                 </div>
                 <div class="col-md-6 form-group">
                   <label for="lname" style="font-weight: bold; color: #111;">Last Name</label>
-                  <input type="text" class="form-control form-control-lg" id="lname" placeholder="Your last name">
+                  <input type="text" name="surname" class="form-control form-control-lg" id="lname" placeholder="Your last name" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label for="email" style="font-weight: bold; color: #111;">Email</label>
-                  <input type="email" id="email" class="form-control form-control-lg" placeholder="your@email.com">
+                  <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="your@email.com" required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label for="message" style="font-weight: bold; color: #111;">Message</label>
-                  <textarea name="message" id="message" class="form-control form-control-lg" cols="30" rows="8" placeholder="How can we help you?"></textarea>
+                  <textarea name="message" id="message" class="form-control form-control-lg" cols="30" rows="8" placeholder="How can we help you?" required></textarea>
                 </div>
               </div>
               <div class="row mt-3">
                 <div class="col-md-6 form-group">
-                  <input type="submit" value="Send Message" class="btn btn-primary btn-lg btn-block">
+                  <input type="submit" id="submitBtn" value="Send Message" class="btn btn-primary btn-lg btn-block">
                 </div>
               </div>
+              <div id="formResponse" class="mt-3" style="display: none; padding: 15px; border-radius: 5px; font-weight: bold;"></div>
             </form>
           </div>
           <div class="col-md-1"></div>
@@ -193,5 +197,65 @@
     <script src="../js/owl.carousel.min.js"></script>
     <script src="../js/jquery.waypoints.min.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formResponse = document.getElementById('formResponse');
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          submitBtn.disabled = true;
+          submitBtn.value = "Sending...";
+          
+          formResponse.style.display = 'none';
+          formResponse.textContent = '';
+          
+          const formData = new FormData(form);
+          const object = Object.fromEntries(formData);
+          const json = JSON.stringify(object);
+          
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: json
+          })
+          .then(async (response) => {
+            let jsonRes = await response.json();
+            if (response.status == 200) {
+              formResponse.style.display = 'block';
+              formResponse.style.backgroundColor = '#d4edda';
+              formResponse.style.color = '#155724';
+              formResponse.style.border = '1px solid #c3e6cb';
+              formResponse.textContent = "Thank you! Your message has been sent successfully.";
+              form.reset();
+            } else {
+              console.log(response);
+              formResponse.style.display = 'block';
+              formResponse.style.backgroundColor = '#f8d7da';
+              formResponse.style.color = '#721c24';
+              formResponse.style.border = '1px solid #f5c6cb';
+              formResponse.textContent = jsonRes.message || "An error occurred while sending. Please try again later.";
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            formResponse.style.display = 'block';
+            formResponse.style.backgroundColor = '#f8d7da';
+            formResponse.style.color = '#721c24';
+            formResponse.style.border = '1px solid #f5c6cb';
+            formResponse.textContent = "A network connection error occurred. Please try again.";
+          })
+          .then(() => {
+            submitBtn.disabled = false;
+            submitBtn.value = "Send Message";
+          });
+        });
+      }
+    </script>
   </body>
 </html>
