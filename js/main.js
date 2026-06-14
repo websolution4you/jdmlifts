@@ -202,7 +202,7 @@
 						var currentVal = Math.min(Math.floor((progress / duration) * endVal), endVal);
 						
 						var suffix = "";
-						if (endVal === 8 || endVal === 1130) {
+						if (endVal === 8 || endVal === 750) {
 							suffix = "+";
 						} else if (endVal === 100) {
 							suffix = "%";
