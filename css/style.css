@@ -263,6 +263,20 @@ header {
   .owl-carousel.home-slider:focus .owl-nav, .owl-carousel.home-slider:hover .owl-nav {
     opacity: 1;
     visibility: visible; }
+  .slider-item {
+    position: relative; }
+    .slider-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1; }
+    .slider-item .container {
+      position: relative;
+      z-index: 2; }
   .owl-carousel.home-slider .slider-item {
     background-size: cover;
     background-repeat: no-repeat;
@@ -297,9 +311,10 @@ header {
         transition: none; }
       .owl-carousel.home-slider .slider-item .slider-text p {
         font-size: 20px;
-        line-height: 1.5;
-        font-weight: 300;
-        color: white; }
+        line-height: 1.6;
+        font-weight: 400 !important;
+        color: white;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.6) !important; }
   .owl-carousel.home-slider.inner-page .slider-item {
     height: calc(50vh - 117px);
     min-height: 500px; }
@@ -1046,4 +1061,10 @@ header .navbar .cta-btn2 .nav-link:hover span {
   .cta-overlap .text .btn-wrap {
     margin-top: 20px;
   }
+}
+
+/* Global enhancement for slider description texts (text popping overlay) */
+.slider-text p {
+  font-weight: 400 !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.7) !important;
 }
