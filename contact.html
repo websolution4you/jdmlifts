@@ -99,17 +99,20 @@
             <div class="row">
               <div class="col-md-6 form-group">
                 <label for="fname" style="font-weight: bold; color: #111;">Meno</label>
-                <input type="text" name="name" class="form-control form-control-lg" id="fname" placeholder="Vaše meno" required>
+                <input type="text" name="name" class="form-control form-control-lg" id="fname" placeholder="Vaše meno"
+                  required>
               </div>
               <div class="col-md-6 form-group">
                 <label for="lname" style="font-weight: bold; color: #111;">Priezvisko</label>
-                <input type="text" name="surname" class="form-control form-control-lg" id="lname" placeholder="Vaše priezvisko" required>
+                <input type="text" name="surname" class="form-control form-control-lg" id="lname"
+                  placeholder="Vaše priezvisko" required>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 form-group">
                 <label for="email" style="font-weight: bold; color: #111;">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="vas@email.sk" required>
+                <input type="email" name="email" id="email" class="form-control form-control-lg"
+                  placeholder="vas@email.sk" required>
               </div>
             </div>
             <div class="row">
@@ -124,7 +127,8 @@
                 <input type="submit" id="submitBtn" value="Odoslať správu" class="btn btn-primary btn-lg btn-block">
               </div>
             </div>
-            <div id="formResponse" class="mt-3" style="display: none; padding: 15px; border-radius: 5px; font-weight: bold;"></div>
+            <div id="formResponse" class="mt-3"
+              style="display: none; padding: 15px; border-radius: 5px; font-weight: bold;"></div>
           </form>
         </div>
         <div class="col-md-1"></div>
@@ -140,8 +144,8 @@
           </p>
 
           <h5 class="text-uppercase mb-2" style="font-weight: bold; color: #fecd0e;">E-mail</h5>
-          <p class="mb-4" style="font-size: 1.1rem;"><a href="mailto:jdmlifts@gmail.com"
-              style="color: #111; text-decoration: underline;">jdmlifts@gmail.com</a></p>
+          <p class="mb-4" style="font-size: 1.1rem;"><a href="mailto:miroslavdvorak193@gmail.com"
+              style="color: #111; text-decoration: underline;">miroslavdvorak193@gmail.com</a></p>
 
           <h5 class="text-uppercase mb-2" style="font-weight: bold; color: #fecd0e;">Telefón</h5>
           <p class="mb-4 text-black" style="font-size: 1.1rem; line-height: 1.6;">
@@ -189,7 +193,8 @@
                   href="tel:00421911388162" style="color: #fff;">+421 911388162</a></span></li>
             <li class="d-flex align-items-start mb-3"><span class="mr-3 text-primary"
                 style="font-weight: bold; color: #fecd0e !important;">E-mail:</span><span class="text-white"><a
-                  href="mailto:jdmlifts@gmail.com" style="color: #fff;">jdmlifts@gmail.com</a></span></li>
+                  href="mailto:miroslavdvorak193@gmail.com" style="color: #fff;">miroslavdvorak193@gmail.com</a></span>
+            </li>
           </ul>
         </div>
         <div class="col-md-2 mb-4 mb-md-0">
@@ -237,19 +242,19 @@
     const formResponse = document.getElementById('formResponse');
 
     if (form) {
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         submitBtn.disabled = true;
         submitBtn.value = "Odosiela sa...";
-        
+
         formResponse.style.display = 'none';
         formResponse.textContent = '';
-        
+
         const formData = new FormData(form);
         const object = Object.fromEntries(formData);
         const json = JSON.stringify(object);
-        
+
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
@@ -258,36 +263,36 @@
           },
           body: json
         })
-        .then(async (response) => {
-          let jsonRes = await response.json();
-          if (response.status == 200) {
-            formResponse.style.display = 'block';
-            formResponse.style.backgroundColor = '#d4edda';
-            formResponse.style.color = '#155724';
-            formResponse.style.border = '1px solid #c3e6cb';
-            formResponse.textContent = "Ďakujeme! Správa bola úspešne odoslaná.";
-            form.reset();
-          } else {
-            console.log(response);
+          .then(async (response) => {
+            let jsonRes = await response.json();
+            if (response.status == 200) {
+              formResponse.style.display = 'block';
+              formResponse.style.backgroundColor = '#d4edda';
+              formResponse.style.color = '#155724';
+              formResponse.style.border = '1px solid #c3e6cb';
+              formResponse.textContent = "Ďakujeme! Správa bola úspešne odoslaná.";
+              form.reset();
+            } else {
+              console.log(response);
+              formResponse.style.display = 'block';
+              formResponse.style.backgroundColor = '#f8d7da';
+              formResponse.style.color = '#721c24';
+              formResponse.style.border = '1px solid #f5c6cb';
+              formResponse.textContent = jsonRes.message || "Nastala chyba pri odosielaní. Skúste to znova neskôr.";
+            }
+          })
+          .catch(error => {
+            console.log(error);
             formResponse.style.display = 'block';
             formResponse.style.backgroundColor = '#f8d7da';
             formResponse.style.color = '#721c24';
             formResponse.style.border = '1px solid #f5c6cb';
-            formResponse.textContent = jsonRes.message || "Nastala chyba pri odosielaní. Skúste to znova neskôr.";
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          formResponse.style.display = 'block';
-          formResponse.style.backgroundColor = '#f8d7da';
-          formResponse.style.color = '#721c24';
-          formResponse.style.border = '1px solid #f5c6cb';
-          formResponse.textContent = "Nastala chyba pri sieťovom spojení. Skúste to znova.";
-        })
-        .then(() => {
-          submitBtn.disabled = false;
-          submitBtn.value = "Odoslať správu";
-        });
+            formResponse.textContent = "Nastala chyba pri sieťovom spojení. Skúste to znova.";
+          })
+          .then(() => {
+            submitBtn.disabled = false;
+            submitBtn.value = "Odoslať správu";
+          });
       });
     }
   </script>
