@@ -1153,9 +1153,22 @@ header .navbar .cta-btn2 .nav-link:hover span {
   background: transparent !important;
 }
 
-.home-slider-wrapper .slider-item {
-  background-image: none !important;
-  background-color: transparent !important;
+/* Only apply transparent backgrounds to slides on desktop when video is active */
+@media (min-width: 992px) {
+  .home-slider-wrapper.video-active .slider-item {
+    background-image: none !important;
+    background-color: transparent !important;
+  }
+}
+
+/* On mobile/tablet, hide video element and wrapper overlay, fallback to default slide backgrounds */
+@media (max-width: 991.98px) {
+  .home-slider-wrapper .slider-video {
+    display: none !important;
+  }
+  .home-slider-wrapper::after {
+    display: none !important;
+  }
 }
 
 

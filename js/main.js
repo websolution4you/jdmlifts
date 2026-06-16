@@ -332,10 +332,33 @@
 		}
 	});
 
-	// Slow down homepage video playback speed
-	var sliderVideo = document.querySelector('.slider-video');
-	if (sliderVideo) {
-		sliderVideo.playbackRate = 0.45; // Smooth slow motion (45% speed)
+	// Dynamically inject and configure the background video only on desktop devices (width >= 992px)
+	// to prevent downloading 64MB of data and lagging on mobile devices.
+	if (window.innerWidth >= 992) {
+		var wrapper = document.querySelector('.home-slider-wrapper');
+		if (wrapper) {
+			var video = document.createElement('video');
+			video.autoplay = true;
+			video.muted = true;
+			video.loop = true;
+			video.playsInline = true;
+			video.className = 'slider-video';
+
+			var source = document.createElement('source');
+			// Detect if we are in the English subdirectory
+			var isEnglish = window.location.pathname.split('/').indexOf('en') > -1;
+			source.src = isEnglish ? '../img/20251025_114004.mp4' : 'img/20251025_114004.mp4';
+			source.type = 'video/mp4';
+
+			video.appendChild(source);
+			wrapper.insertBefore(video, wrapper.firstChild);
+
+			// Slow down homepage video playback speed to 45%
+			video.playbackRate = 0.45;
+
+			// Add class to trigger transparency on the slider items
+			wrapper.classList.add('video-active');
+		}
 	}
 
 })(jQuery);
