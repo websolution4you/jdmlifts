@@ -1052,4 +1052,97 @@ header .navbar .cta-btn2 .nav-link:hover span {
 		}
 	}
 }
+
+/* Global enhancement for slider description texts (text popping overlay) */
+.slider-text p {
+	font-weight: 400 !important;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Homepage slider background image overlay removal and frosted-glass text readability container */
+.home-slider:not(.inner-page) {
+	.slider-item::before {
+		background: none !important;
+		display: none !important;
+	}
+	.slider-text .element-animate {
+		background: rgba(0, 0, 0, 0.25) !important;
+		backdrop-filter: blur(4px) !important;
+		-webkit-backdrop-filter: blur(4px) !important;
+		padding: 45px 35px !important;
+		border-radius: 16px !important;
+		border: 1px solid rgba(255, 255, 255, 0.08) !important;
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+		display: inline-block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+		@media (max-width: 575.98px) {
+			padding: 25px 15px !important;
+		}
+	}
+}
+
+/* Mobile footer content center-alignment overrides */
+@media (max-width: 767.98px) {
+	.site-footer {
+		text-align: center !important;
+		.footer-link li {
+			display: block !important;
+			text-align: center !important;
+			span {
+				display: block !important;
+				margin-right: 0 !important;
+				margin-bottom: 5px !important;
+			}
+		}
+		.footer-social {
+			justify-content: center !important;
+		}
+	}
+}
+
+/* Background Video Slider Styles */
+.home-slider-wrapper {
+	position: relative;
+	overflow: hidden;
+	height: calc(100vh - 117px);
+	min-height: 700px;
+
+	.slider-video {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: 0;
+		-webkit-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		object-fit: cover;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.45); /* Dark overlay to ensure text contrast */
+		z-index: 1;
+	}
+
+	.home-slider {
+		position: relative;
+		z-index: 2;
+		background: transparent !important;
+	}
+
+	.slider-item {
+		background-image: none !important;
+		background-color: transparent !important;
+	}
+}
 

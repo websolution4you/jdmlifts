@@ -1113,4 +1113,49 @@ header .navbar .cta-btn2 .nav-link:hover span {
   }
 }
 
+/* Background Video Slider Styles */
+.home-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 117px);
+  min-height: 700px;
+}
+
+.home-slider-wrapper .slider-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.home-slider-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45); /* Dark overlay to ensure text contrast */
+  z-index: 1;
+}
+
+.home-slider-wrapper .home-slider {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
+}
+
+.home-slider-wrapper .slider-item {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
 

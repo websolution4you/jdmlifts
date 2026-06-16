@@ -332,4 +332,10 @@
 		}
 	});
 
+	// Slow down homepage video playback speed
+	var sliderVideo = document.querySelector('.slider-video');
+	if (sliderVideo) {
+		sliderVideo.playbackRate = 0.45; // Smooth slow motion (45% speed)
+	}
+
 })(jQuery);
