@@ -351,8 +351,8 @@
 		video.appendChild(source);
 		wrapper.insertBefore(video, wrapper.firstChild);
 
-		// Slow down homepage video playback speed to 60%
-		video.playbackRate = 0.60;
+		// Slow down homepage video playback speed to 70%
+		video.playbackRate = 0.70;
 
 		// Add class to trigger transparency on the slider items
 		wrapper.classList.add('video-active');
