@@ -345,7 +345,7 @@
 		var source = document.createElement('source');
 		// Detect if we are in the English subdirectory
 		var isEnglish = window.location.pathname.split('/').indexOf('en') > -1;
-		source.src = isEnglish ? '../img/20251025_114004.mp4#t=4' : 'img/20251025_114004.mp4#t=4';
+		source.src = isEnglish ? '../img/videoVytah.mp4' : 'img/videoVytah.mp4';
 		source.type = 'video/mp4';
 
 		video.appendChild(source);
