@@ -340,19 +340,35 @@
 		video.muted = true;
 		video.loop = true;
 		video.playsInline = true;
+		video.setAttribute('webkit-playsinline', 'true');
 		video.className = 'slider-video';
+
+		// Mobile detection
+		var isMobile = window.innerWidth < 768;
 
 		var source = document.createElement('source');
 		// Detect if we are in the English subdirectory
 		var isEnglish = window.location.pathname.split('/').indexOf('en') > -1;
-		source.src = isEnglish ? '../img/videoVytah.mp4' : 'img/videoVytah.mp4';
+		
+		// Append a timestamp cache-buster to prevent mobile caching
+		var cacheBuster = '?t=' + new Date().getTime();
+		source.src = (isEnglish ? '../img/videoVytah.mp4' : 'img/videoVytah.mp4') + cacheBuster;
 		source.type = 'video/mp4';
 
 		video.appendChild(source);
 		wrapper.insertBefore(video, wrapper.firstChild);
 
-		// Slow down homepage video playback speed to 90%
-		video.playbackRate = 0.90;
+		// Apply correct speed depending on screen size (1.0 for mobile, 0.90 for desktop)
+		var targetSpeed = isMobile ? 1.0 : 0.90;
+		video.playbackRate = targetSpeed;
+
+		// Ensure the playback speed is applied once video loads/plays (crucial for mobile safari)
+		video.addEventListener('loadedmetadata', function() {
+			video.playbackRate = targetSpeed;
+		});
+		video.addEventListener('play', function() {
+			video.playbackRate = targetSpeed;
+		});
 
 		// Add class to trigger transparency on the slider items
 		wrapper.classList.add('video-active');
