@@ -332,31 +332,17 @@
 		}
 	});
 
-	// Dynamically inject and configure the background video on all devices
-	var wrapper = document.querySelector('.home-slider-wrapper');
-	if (wrapper) {
-		var video = document.createElement('video');
-		video.autoplay = true;
-		video.muted = true;
-		video.loop = true;
-		video.playsInline = true;
-		video.setAttribute('webkit-playsinline', 'true');
-		video.className = 'slider-video';
-
+	// Configure the background video on all devices
+	var video = document.getElementById('bg-video');
+	if (video) {
 		// Mobile detection
 		var isMobile = window.innerWidth < 768;
 
-		var source = document.createElement('source');
-		// Detect if we are in the English subdirectory
+		// Force the browser to load a fresh copy of the video (bypassing cache)
 		var isEnglish = window.location.pathname.split('/').indexOf('en') > -1;
-		
-		// Append a timestamp cache-buster to prevent mobile caching
 		var cacheBuster = '?t=' + new Date().getTime();
-		source.src = (isEnglish ? '../img/videoVytah.mp4' : 'img/videoVytah.mp4') + cacheBuster;
-		source.type = 'video/mp4';
-
-		video.appendChild(source);
-		wrapper.insertBefore(video, wrapper.firstChild);
+		video.src = (isEnglish ? '../img/videoVytah.mp4' : 'img/videoVytah.mp4') + cacheBuster;
+		video.load();
 
 		// Apply correct speed depending on screen size (1.0 for mobile, 0.90 for desktop)
 		var targetSpeed = isMobile ? 1.0 : 0.90;
@@ -369,9 +355,6 @@
 		video.addEventListener('play', function() {
 			video.playbackRate = targetSpeed;
 		});
-
-		// Add class to trigger transparency on the slider items
-		wrapper.classList.add('video-active');
 	}
 
 })(jQuery);
