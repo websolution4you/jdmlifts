@@ -230,7 +230,7 @@
 			'<span id="lightbox-close" style="position:absolute; top:20px; right:30px; font-size:40px; font-weight:bold; cursor:pointer; color:#fff; user-select:none; z-index:10001;">&times;</span>' +
 			'<a id="lightbox-prev" style="position:absolute; left:20px; font-size:45px; cursor:pointer; color:#fff; user-select:none; text-decoration:none; z-index:10001; transition: color 0.2s;">&#10094;</a>' +
 			'<div style="max-width:85%; max-height:80%; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">' +
-				'<img id="lightbox-img" src="" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:4px; box-shadow:0 10px 30px rgba(0,0,0,0.5); transition:transform 0.25s ease, opacity 0.25s ease;">' +
+				'<img id="lightbox-img" src="" draggable="false" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:4px; box-shadow:0 10px 30px rgba(0,0,0,0.5); transition:transform 0.25s ease, opacity 0.25s ease; -webkit-user-drag: none; user-select: none;">' +
 			'</div>' +
 			'<div id="lightbox-caption" style="margin-top:20px; font-size:18px; text-align:center; font-family:\'Poppins\', sans-serif; font-weight:400; padding:0 20px;"></div>' +
 			'<a id="lightbox-next" style="position:absolute; right:20px; font-size:45px; cursor:pointer; color:#fff; user-select:none; text-decoration:none; z-index:10001; transition: color 0.2s;">&#10095;</a>' +
@@ -361,13 +361,6 @@
 			touchstartY = touch.clientY;
 		}, { passive: true });
 
-		lightboxEl.addEventListener('touchmove', function(event) {
-			// Prevent default bouncing/scrolling behavior during horizontal swipes
-			if (Math.abs(event.touches[0].clientX - touchstartX) > 10) {
-				event.preventDefault();
-			}
-		}, { passive: false });
-
 		lightboxEl.addEventListener('touchend', function(event) {
 			var touch = event.changedTouches[0];
 			touchendX = touch.clientX;
@@ -380,8 +373,8 @@
 		var deltaX = touchendX - touchstartX;
 		var deltaY = touchendY - touchstartY;
 		
-		// Threshold: horizontal distance must be at least 40px and vertical must be less than 80px
-		if (Math.abs(deltaX) > 40 && Math.abs(deltaY) < 80) {
+		// Threshold: horizontal distance must be at least 40px and must be greater than vertical drift
+		if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
 			if (deltaX < 0) {
 				// Swiped left -> Next
 				var nextIndex = (currentIndex + 1) % galleryItems.length;
